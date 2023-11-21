@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Create Charge</title>
+</head>
+<body>
+    <button onclick="createPayment()">Pay with bKash</button>
+
+    <script>
+      function createPayment(){
+        const requestBody = {
+          apiKey: 'YOUR-API-KEY',
+          secretkey: 'YOUR-SECRET-KEY',
+          amount: '100',
+          fullname: 'Nobody',
+          email: 'nobody@gmail.com',
+          metadata: {
+            customerID: '54634635634',
+            orderID: '65443443',
+          },
+          successurl: 'https://your-domain.com/success.php',
+          cancelurl: 'https://your-domain.com/cancel.php',
+          webhookUrl: 'https://your-domain.com/webhook.php',
+        };
+
+        // Fetch API POST request
+        fetch('https://pay.your-domain.com/payment/api/create_payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Received JSON response:', data);
+            // Handle the JSON response here
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Verify Payment</title>
+</head>
+<body>
+    <button onclick="verifyPayment()">Verify</button>
+
+    <script>
+      function verifyPayment(){
+        const requestBody = {
+          apiKey: 'YOUR-API-KEY',
+          secretkey: 'YOUR-SECRET-KEY',
+          paymentID: '756447566',
+        };
+
+        // Fetch API POST request
+        fetch('https://pay.your-domain.com/payment/api/verify_payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Received JSON response:', data);
+            // Handle the JSON response here
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
+      }
+    </script>
+</body>
+</html>
